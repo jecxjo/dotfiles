@@ -1,0 +1,8 @@
+startup_message off
+
+caption always
+caption string "%{kd}%-w%{r}%n.%t%{-}%+w"
+
+time '[%c:%s] %D %d/%M %Y'
+
+idle 1800 lockscreen

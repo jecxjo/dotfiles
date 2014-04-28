@@ -40,19 +40,3 @@ then
 else
  start_agent;
 fi 
-
-export PATH=$HOME/pi/x-tools/crosstool-ng/bin::$HOME/.gem/ruby/2.0.0/bin:$HOME/.gem/ruby/1.9.1/bin:$HOME/.shundle/bundle/shundle/bin:$PATH
-
-export BROWSER=chromium
-export GPGKEY=EF9D500139B01D89
-
-
-export http_proxy=http://localhost:8123/
-export https_proxy=$http_proxy
-export ftp_proxy=$http_proxy
-export rsync_proxy=$http_proxy
-export no_proxy="localhost, 127.0.0.1"
-[[ -f "/home/jeff/.config/autopackage/paths-bash" ]] && . "/home/jeff/.config/autopackage/paths-bash"
-
-export CLOJURESCRIPT_HOME=$HOME/.bin/clojurescript
-export PATH=$PATH:$CLOJURESCRIPT_HOME/bin
