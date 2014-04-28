@@ -1,2 +1,5 @@
+set -a
 # Trim starting and ending white space
-alias trim="sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'"
+function trim {
+  sed -e 's/^[[:space:]]*//g' -e 's/[[:space:]]*\$//g'
+}

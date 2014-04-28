@@ -1,4 +1,5 @@
 # Dictionary lookup
+set -a
 function dictionary {
   if [[ $# -ge 2 ]]
   then

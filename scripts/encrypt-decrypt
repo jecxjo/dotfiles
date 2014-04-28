@@ -1,3 +1,5 @@
+set -a
+
 # Encryption/Decryption
 function encrypt {
   tar --create --file - --posix --gzip -- $* | \

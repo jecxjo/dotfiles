@@ -1,2 +1,6 @@
+set -a
+
 # Get IP Address
-alias whatsmyip='curl -s ip.nu | html2ascii'
+function whatsmyip {
+  curl -s ip.nu | html2ascii
+}

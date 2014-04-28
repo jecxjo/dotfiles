@@ -1,3 +1,4 @@
+set -a
 # Mark and Jump
 export MARKPATH=$HOME/.marks
 function jump { 

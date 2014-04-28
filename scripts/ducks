@@ -1,3 +1,6 @@
+set -a
 # Find the disk hog
-alias ducks='du -cks *|sort -rn|head -11'
+function ducks {
+  du -cks *|sort -rn|head -11
+}
 

@@ -1,3 +1,4 @@
+set -a
 # Better man page coloring
 man() {
 	env \

@@ -1,0 +1,13 @@
+set -a
+# Pipe text to typer and it echos it as if someone was typing
+function typer {
+  while read x
+  do
+    for((i=0;i<${#x};i++))
+    do
+      echo -n "${x:$i:1}"
+      sleep .06
+    done
+  echo
+  done
+}

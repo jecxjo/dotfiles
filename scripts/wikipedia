@@ -1,3 +1,4 @@
+set -a
 # Wikipedia lookup
 function wikipedia {
   searchterm=`echo $@ | sed -e 's/ /_/g'`

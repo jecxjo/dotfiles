@@ -1,3 +1,4 @@
+set -a
 # Screen
 alias sc="screen -S"
 alias sl="screen -ls"

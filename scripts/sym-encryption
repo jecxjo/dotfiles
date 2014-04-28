@@ -1,3 +1,4 @@
+set -a
 # Symetric Encryptionsing GnuPG
 function sym-encrypt {
   if [[ $# -eq 2 ]]

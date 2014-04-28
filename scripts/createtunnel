@@ -1,4 +1,5 @@
 # create ssh tunnel
+set -a
 function createTunnel {
   if [ $# -eq 3 ]
   then

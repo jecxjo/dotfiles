@@ -1,3 +1,5 @@
+set -a
+
 # mkdir + cd
 function mkcd {
   mkdir -p "$1"

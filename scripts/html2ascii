@@ -1,3 +1,7 @@
+set -a
+
 # Convert html file to ASCII
-alias html2ascii='lynx -force_html -stdin -dump -nolist'
+function html2ascii {
+  lynx -force_html -stdin -dump -nolist
+}
 

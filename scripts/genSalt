@@ -1,3 +1,6 @@
+set -a
 # genSalt - gennerate password salt
-alias genSalt='openssl rand -base64 32'
+function genSalt {
+  openssl rand -base64 32
+}
 

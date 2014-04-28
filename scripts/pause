@@ -1,3 +1,6 @@
+set -a
 # pause
-alias pause='read -p "Press Any Key"'
+function pause {
+  read -p "Press Any Key"
+}
 
