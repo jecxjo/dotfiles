@@ -12,10 +12,9 @@ for file in $HOME/.scripts/*
 do
   source $file
 done
-export PATH=$HOME/.bin:$PATH
+export PATH=$PATH:$HOME/.bin
 
 # Rest of RC
-source /etc/profile
 PS1='[\u@\h \W]\$ '
 
 SSH_ENV="$HOME/.ssh/environment"
