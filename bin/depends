@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+	echo "Usage: depends <binary>"
+	exit 1
+fi
+
+output=$(ldd $1)
+
+OIFS="${IFS}"
+NIFS=$'\n'
+
+IFS="${NIFS}"
+
+for LINE in ${output} ; do
+	IFS="${OIFS}"
+
+	library=$(echo ${LINE} | awk '{print $3}')
+
+	yaourt -Qo ${library}
+
+	IFS="${NIFS}"
+done
+
+IFS="${OIFS}"
+
+exit 0

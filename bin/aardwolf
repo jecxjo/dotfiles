@@ -1,0 +1,5 @@
+#!/bin/sh
+
+tt++ -r $HOME/.aw/setup.tin
+
+exit 0

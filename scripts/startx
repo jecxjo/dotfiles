@@ -1,0 +1,2 @@
+# Startx - start X windows and trigger vlock
+alias startx='/usr/bin/startx; vlock'

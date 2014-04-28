@@ -1,0 +1,25 @@
+# create ssh tunnel
+function createTunnel {
+  if [ $# -eq 3 ]
+  then
+    user=$1
+    host=$2
+    localPort=$3
+    remotePort=$3
+  else
+    if [ $# -eq 4 ]
+    then
+      user=$1
+      host=$2
+      localPort=$3
+      remotePort=$4
+    else
+      echo -n "User: "; read user
+      echo -n "host: "; read host
+      echo -n "Distant host: "; read remotePort
+      echo -n "Local port: "; read localPort
+    fi
+  fi
+  ssh -N -f $user@$host -L ${localPort}:${host}:${remotePort}
+}
+

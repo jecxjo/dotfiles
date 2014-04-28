@@ -1,0 +1,2 @@
+# Convert Word Doc file to PDF
+alias doc2pdf='unoconv -f pdf'

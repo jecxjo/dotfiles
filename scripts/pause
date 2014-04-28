@@ -1,0 +1,3 @@
+# pause
+alias pause='read -p "Press Any Key"'
+

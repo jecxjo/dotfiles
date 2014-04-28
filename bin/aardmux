@@ -1,0 +1,7 @@
+#!/bin/bash
+
+tmux kill-session -t aardwolf
+tmux new-session -d -s aardwolf -x 189 -y 47
+tmux splitw -h -l 159 'tail -fs .1 /home/jeff/.aw/Aardwolf-chats'
+tmux splitw -v -l 100 'tt++ -G /home/jeff/.aw/setup.tin;bash -i'
+tmux attach-session -t aardwolf

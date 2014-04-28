@@ -1,0 +1,3 @@
+# genSalt - gennerate password salt
+alias genSalt='openssl rand -base64 32'
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SRC_URL=$1
+TYPE=$2
+
+echo "scanning: $SRC_URL $TYPE"
+LINKS=`lynx --dump $SRC_URL | awk '/http/{print $2}' | grep $TYPE`
+
+CNT=`echo "$LINKS" | wc -l`
+echo "Found $CNT links"
+
+for i in $(echo "$LINKS"); do
+  wget "$i"
+done
+
+exit 0

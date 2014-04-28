@@ -1,0 +1,6 @@
+# Screen
+alias sc="screen -S"
+alias sl="screen -ls"
+alias sr="screen -r"
+
+

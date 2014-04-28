@@ -1,0 +1,5 @@
+# list tree
+function ltree {
+    tree -C $* | less -R
+}
+

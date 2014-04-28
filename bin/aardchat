@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tail -fs .1 $HOME/.aw/Aardwolf-chats

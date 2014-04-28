@@ -1,0 +1,3 @@
+# links using framebuffer
+alias fblinks='xlinks -g -driver fb'
+

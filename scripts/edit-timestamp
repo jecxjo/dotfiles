@@ -1,0 +1,12 @@
+# Edit without changing timestamp
+export MY_TMPDIR=/tmp
+edit-timestamp () {
+  REAL_FILE=$1
+  TMP_FILE=`mktemp $MY_TMPDIR/file-XXXXXX`
+  cp -p $REAL_FILE $TMP_FILE
+  $EDITOR $TMP_FILE
+  touch -r $REAL_FILE $TMP_FILE
+  cp -p $TMP_FILE $REAL_FILE
+  rm -f $TMP_FILE
+}
+

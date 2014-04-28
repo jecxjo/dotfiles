@@ -1,0 +1,2 @@
+# Get IP Address
+alias whatsmyip='curl -s ip.nu | html2ascii'

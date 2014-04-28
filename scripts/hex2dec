@@ -1,0 +1,2 @@
+# Convert hex to decimal
+function hex2dec { printf "%d\n" 0x$1; }
