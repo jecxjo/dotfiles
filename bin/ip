@@ -1,0 +1,8 @@
+#!/bin/sh
+IP=`echo $SSH_CLIENT | awk '{print $1}'`
+OLDIP=`cat ~/.bin/.ip`
+if [ "$IP" != "$OLDIP" ] ;
+then
+  echo $IP > ~/.bin/.ip
+  mdns $IP
+fi

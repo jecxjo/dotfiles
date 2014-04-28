@@ -6,7 +6,9 @@ set shiftwidth=2
 set si
 syntax on
 set expandtab
-setlocal cm=blowfish
+if version >= 703
+  setlocal cm=blowfish
+endif
 
 filetype plugin indent on
 filetype on

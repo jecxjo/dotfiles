@@ -1,0 +1,85 @@
+#!/bin/sh
+#
+# atr: add to rsslist
+#
+# for each email message on stdin, grabs the email address from
+# the From: header and appends it to my personal whitelist.
+#
+# see http://impressive.net/people/gerald/2000/12/spam-filtering.html
+#
+# Gerald Oskoboiny, 18 Dec 2000
+#
+# $Id: atw,v 1.6 2008-07-04 05:52:44 gerald Exp $
+#
+# replaced with an adaptation of Hugo's improved version,
+# (c) 2001 Hugo Haas - Public domain
+#
+
+PATH=/bin:/usr/bin:/usr/pkg/bin
+RSSLIST=$HOME/.mail/.rsslist
+LOCKFILE=$HOME/.mail/.rl.lock
+
+umask 077
+
+# Get a lock
+lock() {
+  lockfile $LOCKFILE
+  # Ensure that the lock will be removed when we are done
+  trap "rm -f $LOCKFILE" 0 2 3 15
+  [ -f $RSSLIST ] || touch $RSSLIST 
+}
+
+# Add an email address to the whitelist
+add_address() {
+  grep -F -i -x -q "$1" $RSSLIST
+  if [ $? = 1 ]
+  then
+    echo "$1" >> $RSSLIST
+  fi
+}
+
+# Add a list of adresses
+add_addresses() {
+  for email in $*
+  do
+    add_address $email
+  done
+  exit
+}
+
+# If -t is given as a first argument, scan the To and Cc fields instead of 
+# the From line.
+if [ "$1" = '-t' ]
+then
+  to='-t'
+  shift
+fi
+ 
+# If argument -a is given, add the list of email addresses given as arguments.
+# If argument -m is given, add a single RFC822 message (from stdin).
+# If argument -M is given, import a list of Mutt aliases (from stdin).
+# Else read a list of RFC822 messages from stdin.
+
+if [ "$1" = '-a' ]
+then
+  lock
+  shift
+  add_addresses $*
+elif [ "$1" = '-m' ]
+then
+  lock
+  if [ "$to" = '-t' ]
+  then 
+    addresses=`formail -x To -x Cc | perl -pn -e 's/,/\n/g' | perl -n -e 'chomp; s/\".*?\"//g; m/[^ ]+@[^ ]+/; $_ = $&; s/^[<]//g; s/[>]$//; print $_."\n";'`
+  else
+    addresses=`formail -XFrom: | formail -r -xTo: | tr -d " "`
+  fi
+  add_addresses $addresses
+elif [ "$1" = '-M' ]
+then
+  addresses=`perl -n -e 'next if (! m/^\w*alias\w/); chomp; s/\".*?\"//g; m/[^ ]+@[^ ]+/; $_ = $&; s/^[<]//g; s/[>]$//; print $_."\n";'`
+  add_addresses $addresses
+fi
+
+exec formail -s $0 $to -m
+
