@@ -16,3 +16,5 @@ filetype on
 au BufNewFile,BufRead *.md set filetype=mkd
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+nnoremap <silent> <C-k> :NERDTreeToggle<CR>
