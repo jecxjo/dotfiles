@@ -8,7 +8,7 @@
 dir=$(pwd)
 echo "Dir: $dir"
 olddir=~/dotfiles_old
-files="bashrc vimrc scripts bin"
+files="bashrc vimrc scripts bin vim"
 timestamp=$(date +%Y-%m-%d-%H-%M)
 
 ####
