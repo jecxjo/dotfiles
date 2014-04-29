@@ -1,2 +1,8 @@
+# Vim files
+.*.un~
+*~
+*.swp
+*.swo
+
 # tags for NERDTree
 vim/bundle/tags
