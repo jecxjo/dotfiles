@@ -2,6 +2,7 @@
 # ~/.bashrc
 #
 
+set -a
 export EDITOR="vim"
 
 # If not running interactively, don't do anything
@@ -29,13 +30,28 @@ function start_agent {
 }
 
 # Source SSH settings, if applicable
+function check_agent {
+  if [[ -f "${SSH_ENV}" ]]
+  then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+      start_agent;
+    }
+  else
+   start_agent;
+  fi 
+}
 
-if [[ -f "${SSH_ENV}" ]]
+if [[ ! -e $HOME/.bashrc.local ]]
 then
-  . "${SSH_ENV}" > /dev/null
-  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-    start_agent;
-  }
+  cat > $HOME/.bashrc.local << EOF
+# file: bashrc.local
+#
+# RC script for local machine. This is not tracked with dotfiles
+# and should contain scripts that are specific to this machine.
+
+# end of script
+EOF
 else
- start_agent;
-fi 
+  source $HOME/.bashrc.local
+fi
