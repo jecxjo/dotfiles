@@ -5,4 +5,4 @@
 *.swo
 
 # tags for NERDTree
-vim/bundle/tags
+vim/bundle/**/doc/tags
