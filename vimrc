@@ -177,6 +177,9 @@ nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>fl :FufLine<CR>
 nmap <Leader>fr :FufRenewCache<CR>
 
+" Alertnate (a.vim)
+let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:./include,sfr:./inc'
+
 "
 " Misc
 "
