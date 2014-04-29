@@ -11,6 +11,10 @@ function unmark {
     rm -i $MARKPATH/$1 
 }
 function marks {
-    ls -l $MARKPATH | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+    for f in $MARKPATH/*
+    do
+      echo "$(basename $f) -> $(readlink $f)" | sed 's/ -/\t-/g'
+    done
+    echo
 }
 
