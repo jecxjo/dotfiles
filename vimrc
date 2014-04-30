@@ -23,11 +23,8 @@ set viewoptions=folds,options,cursor,unix,slash " better unix/win compat
 set virtualedit=onemore "Allow for cursor beyond last character
 set history=1000 " 1000 entries
 set spell " spell check on
-if has('win32') || has('win64')
-  colorscheme torte
-else
-  set background=dark " set dark background
-endif
+set background=dark " set dark background
+colorscheme solarized
 scriptencoding utf-8
 
 " Backups
@@ -154,6 +151,10 @@ endif
 if has("autocmd")
   filetype on
   autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+
+  " Reload vimrc when edited
+  autocmd bufwritepost .vimrc source $MYVIMRC " Unix
+  autocmd bufwritepost _vimrc source $MYVIMRC " Windows
 endif
 
 "
