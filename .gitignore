@@ -4,5 +4,6 @@
 *.swp
 *.swo
 
-# tags for NERDTree
+# tags for bundles
+vim/bundle/tags
 vim/bundle/**/doc/tags

@@ -91,8 +91,6 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buff
 
 " Key Remapping
 let mapleader = ','
-" ; and : operate the same
-nnoremap ; : 
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
 map <C-L> <C-W>l<C-W>_
