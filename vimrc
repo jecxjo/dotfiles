@@ -2,7 +2,7 @@ set nocompatible
 
 " Windows Compat
 if has('win32') || has('win64')
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/_vim
 endif
 
 " Pathogen
@@ -23,7 +23,11 @@ set viewoptions=folds,options,cursor,unix,slash " better unix/win compat
 set virtualedit=onemore "Allow for cursor beyond last character
 set history=1000 " 1000 entries
 set spell " spell check on
-set background=dark " set dark background
+if has('win32') || has('win64')
+  colorscheme torte
+else
+  set background=dark " set dark background
+endif
 scriptencoding utf-8
 
 " Backups
