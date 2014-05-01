@@ -1,6 +1,6 @@
 set nocompatible
 
-" Windows Compat
+" Windows Compatible
 if has('win32') || has('win64')
   set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/_vim
 endif
@@ -80,12 +80,13 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " highlight problematic whitespace
 
 " Formatting
-set nowrap
-set autoindent
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set smartindent
+set nowrap        " Does not wrap by default
+set autoindent    " Automatically do indents
+set shiftwidth=2  " 2 spaces per tab cuz space is limited
+set tabstop=2     " Again, just 2 spaces
+set softtabstop=2 " 2 again
+set shiftround    " Always round when shifting so things line up
+set smartindent   " Make indenting 
 set expandtab
 set pastetoggle=<F12>
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -207,6 +208,14 @@ nmap <Leader>fr :FufRenewCache<CR>
 
 " Alertnate (a.vim)
 let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:./include,sfr:./inc'
+
+"
+" Key Mappings
+"
+" Uppercase
+inoremap <C-u> <esc>viwUwi
+nnoremap <C-u> viwU
+nnoremap <leader>rc :vsplit $MYVIMRC<CR>
 
 "
 " Misc
