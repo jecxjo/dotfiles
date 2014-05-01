@@ -24,7 +24,7 @@ set virtualedit=onemore "Allow for cursor beyond last character
 set history=1000 " 1000 entries
 set spell " spell check on
 set background=dark " set dark background
-colorscheme solarized
+colorscheme gruvbox
 scriptencoding utf-8
 
 " Backups
@@ -155,6 +155,7 @@ if has("autocmd")
   " Reload vimrc when edited
   autocmd bufwritepost .vimrc source $MYVIMRC " Unix
   autocmd bufwritepost _vimrc source $MYVIMRC " Windows
+  autocmd bufwritepost vimrc source $MYVIMRC " Other
 endif
 
 "
