@@ -253,6 +253,12 @@ function! NERDTreeInitAsNeeded()
   endif
 endfunction
 
+" If we have a 'local' version for this machine
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
+endif
+
+" If we have a 'local' version for this project
+if filereadable('.vimrc.local')
+  source .vimrc.local
 endif
