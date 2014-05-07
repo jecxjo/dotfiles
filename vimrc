@@ -74,6 +74,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 set scrolljump=5
 set scrolloff=3
 set foldenable
+set foldmethod=syntax
 set gdefault
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " highlight problematic whitespace
@@ -231,16 +232,16 @@ nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 
 " Tabular
 if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:<CR>
-  vmap <Leader>a: :Tabularize /:<CR>
-  nmap <Leader>a:: :Tabularize /:\zs<CR>
-  vmap <Leader>a:: :Tabularize /:\zs<CR>
-  nmap <Leader>a, :Tabularize /,<CR>
-  vmap <Leader>a, :Tabularize /,<CR>
-  nmap <Leader>a<Bar> :Tabularize/<Bar><CR>
-  vmap <Leader>a<Bar> :Tabularize/<Bar><CR>
+  nmap <Leader>t= :Tabularize /=<CR>
+  vmap <Leader>t= :Tabularize /=<CR>
+  nmap <Leader>t: :Tabularize /:<CR>
+  vmap <Leader>t: :Tabularize /:<CR>
+  nmap <Leader>t:: :Tabularize /:\zs<CR>
+  vmap <Leader>t:: :Tabularize /:\zs<CR>
+  nmap <Leader>t, :Tabularize /,<CR>
+  vmap <Leader>t, :Tabularize /,<CR>
+  nmap <Leader>t<Bar> :Tabularize/<Bar><CR>
+  vmap <Leader>t<Bar> :Tabularize/<Bar><CR>
 endif
 
 " Fuzzy Finder
