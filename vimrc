@@ -22,7 +22,6 @@ set shortmess+=filmnrxoOtT
 set viewoptions=folds,options,cursor,unix,slash " better unix/win compat
 set virtualedit=onemore "Allow for cursor beyond last character
 set history=1000 " 1000 entries
-set spell " spell check on
 set background=dark " set dark background
 colorscheme gruvbox
 scriptencoding utf-8
