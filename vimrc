@@ -145,7 +145,7 @@ if has('cscope')
   cnoreabbrev css cs show
   cnoreabbrev csh cs help
 
-  command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+  command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
 
 " File Types
@@ -208,6 +208,9 @@ nmap <Leader>fr :FufRenewCache<CR>
 
 " Alertnate (a.vim)
 let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:./include,sfr:./inc'
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
 
 "
 " Key Mappings
