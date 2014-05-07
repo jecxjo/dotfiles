@@ -2,13 +2,16 @@ set nocompatible
 
 " Windows Compatible
 if has('win32') || has('win64')
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/_vim
+  if !exists("g:loaded_pathogen")
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/_vim
+  endif
 endif
 
 " Pathogen
-runtime! autoload/pathogen.vim
-silent! call pathogen#helptags()
-silent! call pathogen#runtime_append_all_bundles()
+"runtime! autoload/pathogen.vim
+"silent! call pathogen#helptags()
+"silent! call pathogen#runtime_append_all_bundles()
+execute pathogen#infect()
 
 " General
 if !has('win32') && !has('win64')
