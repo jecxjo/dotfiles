@@ -98,10 +98,36 @@ map <C-K> <C-W>k<C-W>_
 map <C-L> <C-W>l<C-W>_
 map <C-H> <C-W>h<C-W>_
 
+" Uppercase
+inoremap <C-u> <esc>viwUwi
+nnoremap <C-u> viwU
+nnoremap <leader>rc :vsplit $MYVIMRC<CR>
+
+" Movement
 nnoremap j gj
 nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+vnoremap j gj
+vnoremap k gk
+vnoremap gj j
+vnoremap gk k
+
 " Yank to end of line, just like C and D
 nnoremap Y y$
+
+" OS Clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+nnoremap <leader>Y "+Y
+vnoremap <leader>Y "+Y
+
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+
+nnoremap <leader>P "+P
+vnoremap <leader>P "+P
 
 " Code folding
 nmap <leader>f0 :set foldlevel=0<CR>
@@ -148,6 +174,13 @@ if has('cscope')
   command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
 
+" Full-screen Mode Settings
+function! ToggleFullScreen()
+  if has('win32') || has('win64')
+    :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
+  endif
+endfunction
+
 " File Types
 if has("autocmd")
   filetype on
@@ -162,6 +195,18 @@ endif
 "
 " Plugins
 "
+
+" Rainbow
+let g:rainbow_active = 1
+
+function! RainbowOff()
+  if exists('b:rainbow_loaded')
+    call rainbow#clear()
+  endif
+endfunction
+
+" Startify
+
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
@@ -211,14 +256,9 @@ let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
-
-"
-" Key Mappings
-"
-" Uppercase
-inoremap <C-u> <esc>viwUwi
-nnoremap <C-u> viwU
-nnoremap <leader>rc :vsplit $MYVIMRC<CR>
+let g:airline_section_z="%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3c [%02B]"
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_min_count = 2
 
 "
 " Misc
