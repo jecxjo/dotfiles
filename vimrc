@@ -248,16 +248,18 @@ nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 
 " { Tabular
 if exists(":Tabularize")
-  nmap <Leader>t= :Tabularize /=<CR>
-  vmap <Leader>t= :Tabularize /=<CR>
-  nmap <Leader>t: :Tabularize /:<CR>
-  vmap <Leader>t: :Tabularize /:<CR>
-  nmap <Leader>t:: :Tabularize /:\zs<CR>
-  vmap <Leader>t:: :Tabularize /:\zs<CR>
-  nmap <Leader>t, :Tabularize /,<CR>
-  vmap <Leader>t, :Tabularize /,<CR>
-  nmap <Leader>t<Bar> :Tabularize/<Bar><CR>
-  vmap <Leader>t<Bar> :Tabularize/<Bar><CR>
+  nnoremap <Leader>a= :Tabularize /=<CR>
+  vnoremap <Leader>a= :Tabularize /=<CR>
+  nnoremap <Leader>a: :Tabularize /:<CR>
+  vnoremap <Leader>a: :Tabularize /:<CR>
+  nnoremap <Leader>a:: :Tabularize /:\zs<CR>
+  vnoremap <Leader>a:: :Tabularize /:\zs<CR>
+  nnoremap <Leader>a, :Tabularize /,<CR>
+  vnoremap <Leader>a, :Tabularize /,<CR>
+  nnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
+  nnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
+  vnoremap <Leader>a<space> :Tabularize /<space><CR>
+  vnoremap <Leader>a<space> :Tabularize /<space><CR>
 endif
 " }
 
