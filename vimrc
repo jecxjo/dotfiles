@@ -1,19 +1,18 @@
 set nocompatible
 
-" Windows Compatible
+" { Windows Compatible
 if has('win32') || has('win64')
   if !exists("g:loaded_pathogen")
     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/_vim
   endif
 endif
+" }
 
-" Pathogen
-"runtime! autoload/pathogen.vim
-"silent! call pathogen#helptags()
-"silent! call pathogen#runtime_append_all_bundles()
+" { Pathogen
 execute pathogen#infect()
+" }
 
-" General
+" { General
 if !has('win32') && !has('win64')
   set term=$TERM " Make arrow and other keys work
 endif
@@ -28,40 +27,6 @@ set history=1000 " 1000 entries
 set background=dark " set dark background
 colorscheme gruvbox
 scriptencoding utf-8
-
-" Backups
-set backup
-set undofile
-set undolevels=1000
-set undoreload=10000
-au BufWinLeave * silent! mkview " make vim save view
-au BufWinEnter * silent! loadview " make vim load view
-
-" UI
-set tabpagemax=15 " max 15 tabs
-set showmode " display current mode
-set cursorline " highlight current line
-hi cursorline guibg=#333333
-hi CursorColumn guibg=#333333
-
-if has('cmdline_info')
-  set ruler " show the ruler
-  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-  set showcmd
-endif
-
-if has('statusline')
-  set laststatus=2
-  " Broken down into easily includeable segments
-  set statusline=%<%f\    " Filename
-  set statusline+=%w%h%m%r " Options
-  set statusline+=%{fugitive#statusline()} "  Git Hotness
-  set statusline+=\ [%{&ff}/%Y]            " filetype
-  set statusline+=\ [%{getcwd()}]             " current dir
-  set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
-
 set backspace=indent,eol,start " backspace for dummies
 set linespace=0 " no spaces between rows
 set nu " line number
@@ -92,9 +57,47 @@ set shiftround    " Always round when shifting so things line up
 set smartindent   " Make indenting 
 set expandtab
 set pastetoggle=<F12>
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-" Key Remapping
+" Backups
+set backup
+set undofile
+set undolevels=1000
+set undoreload=10000
+au BufWinLeave * silent! mkview " make vim save view
+au BufWinEnter * silent! loadview " make vim load view
+
+" UI
+set tabpagemax=15 " max 15 tabs
+set showmode " display current mode
+set cursorline " highlight current line
+hi cursorline guibg=#333333
+hi CursorColumn guibg=#333333
+
+" Ruler setup
+if has('cmdline_info')
+  set ruler " show the ruler
+  set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+  set showcmd
+endif
+
+" Status line
+if has('statusline')
+  set laststatus=2
+  " Broken down into easily includeable segments
+  set statusline=%<%f\    " Filename
+  set statusline+=%w%h%m%r " Options
+  set statusline+=%{fugitive#statusline()} "  Git Hotness
+  set statusline+=\ [%{&ff}/%Y]            " filetype
+  set statusline+=\ [%{getcwd()}]             " current dir
+  set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
+
+" Remove end of file white space
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+" }
+
+" { Key Remapping
 let mapleader = ','
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
@@ -154,12 +157,18 @@ vnoremap > >gv
 " Write when you forgot sudo
 cmap w!! w !sudo tee % > /dev/null
 
-" Encryption
+" Timestamp
+nnoremap <leader>now "=strftfime("%c")<CR>P
+
+" }
+
+" { Encryption
 if version >= 703
   setlocal cm=blowfish
 endif
+" }
 
-" cscope
+" { cscope
 if has('cscope')
   set cscopetag cscopeverbose
 
@@ -176,15 +185,17 @@ if has('cscope')
 
   command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
+" }
 
-" Full-screen Mode Settings
+" { Full-screen Mode Settings
 function! ToggleFullScreen()
   if has('win32') || has('win64')
     :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
   endif
 endfunction
+" }
 
-" File Types
+" { File Types
 if has("autocmd")
   filetype on
   autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -194,12 +205,13 @@ if has("autocmd")
   autocmd bufwritepost _vimrc source $MYVIMRC " Windows
   autocmd bufwritepost vimrc source $MYVIMRC " Other
 endif
+" }
 
 "
-" Plugins
+" { Plugins
 "
 
-" Rainbow
+" { Rainbow
 let g:rainbow_active = 1
 
 function! RainbowOff()
@@ -207,15 +219,14 @@ function! RainbowOff()
     call rainbow#clear()
   endif
 endfunction
+" }
 
-" Startify
-
-
-" Supertab
+" { Supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+" }
 
-" NERDTree
+" { NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nnoremap <silent> <leader>e :NERDTreeToggle<CR>
@@ -228,12 +239,14 @@ let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
+" }
 
-" SnipMate
+" { SnipMate
 let g:snips_author = 'Jeff Parent <jecxjo@gmail.com>'
 nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+" }
 
-" Tabular
+" { Tabular
 if exists(":Tabularize")
   nmap <Leader>t= :Tabularize /=<CR>
   vmap <Leader>t= :Tabularize /=<CR>
@@ -246,25 +259,39 @@ if exists(":Tabularize")
   nmap <Leader>t<Bar> :Tabularize/<Bar><CR>
   vmap <Leader>t<Bar> :Tabularize/<Bar><CR>
 endif
+" }
 
-" Fuzzy Finder
+" { Fuzzy Finder
 nmap <Leader>ff :FufFile **/<CR>
 nmap <Leader>ft :FufFile<CR>
 nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>fl :FufLine<CR>
 nmap <Leader>fr :FufRenewCache<CR>
+" }
 
-" Alertnate (a.vim)
+" { Alertnate (a.vim)
 let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,sfr:./include,sfr:./inc'
+" }
 
-" Airline
+" { Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_z="%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3c [%02B]"
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
+" }
+
+" }
 
 "
-" Misc
+" { User Functions
+"
+
+
+
+" }
+
+"
+" { Misc
 "
 au BufNewFile,BufRead *.md set filetype=mkd " md files set to markdown
 
@@ -317,3 +344,4 @@ endif
 if filereadable('.vimrc.local')
   source .vimrc.local
 endif
+" }
