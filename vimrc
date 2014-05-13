@@ -1,18 +1,19 @@
 set nocompatible
+filetype off
 
-" { Windows Compatible
+" Windows Compatible {{{
 if has('win32') || has('win64')
   if !exists("g:loaded_pathogen")
     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/_vim
   endif
 endif
-" }
+" }}}
 
-" { Pathogen
+" Pathogen {{{
 execute pathogen#infect()
-" }
+" }}}
 
-" { General
+" General {{{
 if !has('win32') && !has('win64')
   set term=$TERM " Make arrow and other keys work
 endif
@@ -42,7 +43,6 @@ set whichwrap=b,s,h,l,<,>,[,]
 set scrolljump=5
 set scrolloff=3
 set foldenable
-set foldmethod=syntax
 set gdefault
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " highlight problematic whitespace
@@ -95,10 +95,9 @@ endif
 
 " Remove end of file white space
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-" }
+" }}}
 
-" { Key Remapping
-let mapleader = ','
+" Key Remapping {{{
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
 map <C-L> <C-W>l<C-W>_
@@ -160,15 +159,15 @@ cmap w!! w !sudo tee % > /dev/null
 " Timestamp
 nnoremap <leader>now "=strftfime("%c")<CR>P
 
-" }
+" }}}
 
-" { Encryption
+" Encryption {{{
 if version >= 703
   setlocal cm=blowfish
 endif
-" }
+" }}}
 
-" { cscope
+" cscope {{{
 if has('cscope')
   set cscopetag cscopeverbose
 
@@ -185,17 +184,17 @@ if has('cscope')
 
   command! -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
 endif
-" }
+" }}}
 
-" { Full-screen Mode Settings
+" Full-screen Mode Settings {{{
 function! ToggleFullScreen()
   if has('win32') || has('win64')
     :call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)
   endif
 endfunction
-" }
+" }}}
 
-" { File Types
+" File Types {{{
 if has("autocmd")
   filetype on
   autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -205,10 +204,10 @@ if has("autocmd")
   autocmd bufwritepost _vimrc source $MYVIMRC " Windows
   autocmd bufwritepost vimrc source $MYVIMRC " Other
 endif
-" }
+" }}}
 
 "
-" { Plugins
+" Plugins {{{
 "
 
 " { Rainbow
@@ -248,27 +247,19 @@ nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 
 " { Tabular
 if exists(":Tabularize")
-  nnoremap <Leader>a= :Tabularize /=<CR>
-  vnoremap <Leader>a= :Tabularize /=<CR>
-  nnoremap <Leader>a: :Tabularize /:<CR>
-  vnoremap <Leader>a: :Tabularize /:<CR>
-  nnoremap <Leader>a:: :Tabularize /:\zs<CR>
-  vnoremap <Leader>a:: :Tabularize /:\zs<CR>
-  nnoremap <Leader>a, :Tabularize /,<CR>
-  vnoremap <Leader>a, :Tabularize /,<CR>
-  nnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
-  nnoremap <Leader>a<Bar> :Tabularize /<Bar><CR>
-  vnoremap <Leader>a<space> :Tabularize /<space><CR>
-  vnoremap <Leader>a<space> :Tabularize /<space><CR>
+  nnoremap <Leader>t= :Tabularize /=<CR>
+  vnoremap <Leader>t= :Tabularize /=<CR>
+  nnoremap <Leader>t: :Tabularize /:<CR>
+  vnoremap <Leader>t: :Tabularize /:<CR>
+  nnoremap <Leader>t:: :Tabularize /:\zs<CR>
+  vnoremap <Leader>t:: :Tabularize /:\zs<CR>
+  nnoremap <Leader>t, :Tabularize /,<CR>
+  vnoremap <Leader>t, :Tabularize /,<CR>
+  nnoremap <Leader>t<Bar> :Tabularize /<Bar><CR>
+  nnoremap <Leader>t<Bar> :Tabularize /<Bar><CR>
+  vnoremap <Leader>t<space> :Tabularize /<space><CR>
+  vnoremap <Leader>t<space> :Tabularize /<space><CR>
 endif
-" }
-
-" { Fuzzy Finder
-nmap <Leader>ff :FufFile **/<CR>
-nmap <Leader>ft :FufFile<CR>
-nmap <Leader>fb :FufBuffer<CR>
-nmap <Leader>fl :FufLine<CR>
-nmap <Leader>fr :FufRenewCache<CR>
 " }
 
 " { Alertnate (a.vim)
@@ -282,18 +273,18 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 " }
 
-" }
+" }}}
 
 "
-" { User Functions
+" User Functions {{{
 "
 
 
 
-" }
+" }}}
 
 "
-" { Misc
+" Misc {{{
 "
 au BufNewFile,BufRead *.md set filetype=mkd " md files set to markdown
 
@@ -346,4 +337,4 @@ endif
 if filereadable('.vimrc.local')
   source .vimrc.local
 endif
-" }
+" }}}
