@@ -46,6 +46,7 @@ set foldenable
 set gdefault
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " highlight problematic whitespace
+set lazyredraw
 
 " Formatting
 set nowrap        " Does not wrap by default
