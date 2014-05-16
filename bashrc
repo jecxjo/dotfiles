@@ -4,6 +4,8 @@
 
 set -a
 export EDITOR="vim"
+# Set to vi mode
+set -o vi
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
