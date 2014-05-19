@@ -276,9 +276,9 @@ let g:airline#extensions#tabline#tab_min_count = 2
 
 " }}}
 
-"
 " User Functions {{{
-"
+
+" GetWidth {{{
 nnoremap <leader>w :set operatorfunc=<SID>GetWidth<cr>g@
 vnoremap <leader>w :<c-u>call <SID>GetWidth(visualmode())<cr>
 
@@ -296,6 +296,29 @@ function! s:GetWidth(type)
   echom "Length is " . l . "."
   let @@ = l
 endfunction
+" }}}
+
+" Search All Code {{{
+nnoremap <leader>g :set operatorfunc=GrepOperator<CR>g@
+vnoremap <leader>g :<c-u>call GrepOperator(visualmode())<CR>
+
+function! GrepOperator(type)
+  let saved_unnamed_register = @@
+
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal `[v`]y
+  else
+    return
+  endif
+
+  silent execute "grep! -R " . shellescape(@@) . " ."
+  copen
+  let @@ = saved_unnamed_register
+endfunction
+
+" }}}
 
 
 " }}}
