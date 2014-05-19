@@ -105,7 +105,7 @@ map <C-L> <C-W>l<C-W>_
 map <C-H> <C-W>h<C-W>_
 
 " Uppercase
-inoremap <C-u> <esc>viwUwi
+inoremap <C-u> <esc>viwUea
 nnoremap <C-u> viwU
 nnoremap <leader>rc :vsplit $MYVIMRC<CR>
 
@@ -279,7 +279,23 @@ let g:airline#extensions#tabline#tab_min_count = 2
 "
 " User Functions {{{
 "
+nnoremap <leader>w :set operatorfunc=<SID>GetWidth<cr>g@
+vnoremap <leader>w :<c-u>call <SID>GetWidth(visualmode())<cr>
 
+function! s:GetWidth(type)
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+  else
+    return
+  endif
+
+  let l = strlen(@@)
+
+  echom "Length is " . l . "."
+  let @@ = l
+endfunction
 
 
 " }}}
