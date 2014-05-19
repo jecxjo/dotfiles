@@ -64,8 +64,6 @@ set backup
 set undofile
 set undolevels=1000
 set undoreload=10000
-au BufWinLeave * silent! mkview " make vim save view
-au BufWinEnter * silent! loadview " make vim load view
 
 " UI
 set tabpagemax=15 " max 15 tabs
@@ -107,7 +105,7 @@ map <C-H> <C-W>h<C-W>_
 " Uppercase
 inoremap <C-u> <esc>viwUea
 nnoremap <C-u> viwU
-nnoremap <leader>rc :vsplit $MYVIMRC<CR>
+nnoremap <leader>cfg :vsplit $MYVIMRC<CR>
 
 " Movement
 nnoremap j gj
