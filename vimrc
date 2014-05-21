@@ -239,6 +239,10 @@ let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 " }
 
+" NERDCommenter {{{
+let NERDSpaceDelims=1 " Insert space before/after comments
+" }}}
+
 " { SnipMate
 let g:snips_author = 'Jeff Parent <jecxjo@gmail.com>'
 nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
@@ -248,8 +252,8 @@ nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 if exists(":Tabularize")
   nnoremap <Leader>t= :Tabularize /=<CR>
   vnoremap <Leader>t= :Tabularize /=<CR>
-  nnoremap <Leader>t: :Tabularize /:<CR>
-  vnoremap <Leader>t: :Tabularize /:<CR>
+  nnoremap <Leader>tc :Tabularize /:<CR>
+  vnoremap <Leader>tc :Tabularize /:<CR>
   nnoremap <Leader>t:: :Tabularize /:\zs<CR>
   vnoremap <Leader>t:: :Tabularize /:\zs<CR>
   nnoremap <Leader>t, :Tabularize /,<CR>
