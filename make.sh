@@ -20,14 +20,14 @@ echo "...done"
 
 # change to dotfiles directory
 echo "Changing to the $dir directory"
-cd $dir
+cd "$dir"
 echo "...done"
 
 # move any existing dotfiles in homedir
 for file in $files
 do
   echo "Moving ~/.$file"
-  mv -v ~/.$file $olddir/$file-$timestamp
+  mv -v ~/."$file" "$olddir/$file-$timestamp"
   echo "Creating symlink to $file"
-  ln -sf $dir/$file ~/.$file
+  ln -sf "$dir/$file" ~/."$file"
 done

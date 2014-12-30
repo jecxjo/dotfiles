@@ -13,7 +13,7 @@ set -o vi
 # Setup for dotfiles
 for file in $HOME/.scripts/*
 do
-  source $file
+  source "$file"
 done
 export PATH=$PATH:$HOME/.bin
 
@@ -36,7 +36,7 @@ function check_agent {
   if [[ -f "${SSH_ENV}" ]]
   then
     . "${SSH_ENV}" > /dev/null
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+    ps -ef | grep "${SSH_AGENT_PID}" | grep ssh-agent$ > /dev/null || {
       start_agent;
     }
   else
@@ -46,7 +46,7 @@ function check_agent {
 
 if [[ ! -e $HOME/.bashrc.local ]]
 then
-  cat > $HOME/.bashrc.local << EOF
+  cat > "$HOME/.bashrc.local" << EOF
 # file: bashrc.local
 #
 # RC script for local machine. This is not tracked with dotfiles
@@ -55,5 +55,5 @@ then
 # end of script
 EOF
 else
-  source $HOME/.bashrc.local
+  source "$HOME/.bashrc.local"
 fi

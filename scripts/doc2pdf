@@ -1,5 +1,5 @@
 # Convert Word Doc file to PDF
 set -a
 function doc2pdf {
-  unoconv -f pdf $*
+  unoconv -f pdf "$@"
 }

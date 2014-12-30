@@ -2,7 +2,7 @@ set -a
 
 # Show most frequently used commands
 function freq {
-  cut -f1 -d" " $HOME/.bash_history | \
+  cut -f1 -d" " "$HOME"/.bash_history | \
   sort | \
   uniq -c | \
   sort -nr | \

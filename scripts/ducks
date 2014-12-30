@@ -1,6 +1,6 @@
 set -a
 # Find the disk hog
 function ducks {
-  du -cks *|sort -rn|head -11
+  du -cks ./* | sort -rn | head -11
 }
 

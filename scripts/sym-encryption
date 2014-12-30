@@ -5,7 +5,7 @@ function sym-encrypt {
   then
     gpg --compress-algo BZIP2 --bzip2-compress-level 9 \
       --cipher-algo AES256 \
-      --symmetric -a -o $2 $1
+      --symmetric -a -o "$2" "$1"
   else
     echo "usage: sym-encrypt <source> <destination>"
   fi
@@ -14,7 +14,7 @@ function sym-encrypt {
 function sym-decrypt {
   if [[ $# -eq 2 ]]
   then
-    gpg --decrypt -o $2 $1
+    gpg --decrypt -o "$2" "$1"
   else
     echo "usage: sym-decrypt <source> <destination>"
   fi

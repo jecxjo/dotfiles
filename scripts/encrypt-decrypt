@@ -2,12 +2,12 @@ set -a
 
 # Encryption/Decryption
 function encrypt {
-  tar --create --file - --posix --gzip -- $* | \
+  tar --create --file - --posix --gzip -- "$@" | \
   openssl aes-256-cbc -a -salt -out out.enc
 }
 
 function decrypt {
-  openssl aes-256-cbc -d -a -salt -in $1 | \
+  openssl aes-256-cbc -d -a -salt -in "$1" | \
   tar -v --extract --file - --gzip
 }
 

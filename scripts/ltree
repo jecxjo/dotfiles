@@ -2,6 +2,6 @@ set -a
 
 # list tree
 function ltree {
-    tree -C $* | less -R
+    tree -C "$@" | less -R
 }
 

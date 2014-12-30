@@ -1,6 +1,6 @@
 set -a
 # links using framebuffer
 function fblinks {
-  xlinks -g -driver fb $*
+  xlinks -g -driver fb "$@"
 }
 
