@@ -276,6 +276,17 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 " }
 
+" { vim-asterisk
+map * <Plug>(asterisk-*)
+map # <Plug>(asterisk-#)
+map g* <Plug>(asterisk-g*)
+map g# <Plug>(asterisk-g#)
+map z* <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z# <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
+" }
+
 " }}}
 
 " User Functions {{{
