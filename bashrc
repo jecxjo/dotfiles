@@ -18,7 +18,8 @@ done
 export PATH=$PATH:$HOME/.bin
 
 # Rest of RC
-PS1='[\u@\h \W]\$ '
+# PS1='[\u@\h \W]\$ '
+export PS1="\[\e[00;33m\]\u\[\e[0m\]\[\e[00;37m\]@\h:[\[\e[0m\]\[\e[00;36m\]\w\[\e[0m\]\[\e[00;37m\]]\\$ \[\e[0m\]"
 
 SSH_ENV="$HOME/.ssh/environment"
 
