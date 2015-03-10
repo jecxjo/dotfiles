@@ -2,12 +2,50 @@ set -a
 
 # Encryption/Decryption
 function encrypt {
-  tar --create --file - --posix --gzip -- "$@" | \
-  openssl aes-256-cbc -a -salt -out out.enc
+  tar --create --file - --gzip -- "$@" | \
+  openssl aes-256-cbc -salt -out out.enc
 }
 
 function decrypt {
-  openssl aes-256-cbc -d -a -salt -in "$1" | \
-  tar -v --extract --file - --gzip
+  openssl aes-256-cbc -d -salt -in "$1" | \
+  tar -v --extract --gzip --file -
 }
 
+function encrypt-fpw {
+  tar --create --file - --gzip -- "$2" | \
+  pv | \
+  openssl enc -aes-256-cbc -salt -pass file:"$1" -out "$3"
+}
+
+function decrypt-fpw {
+  DIR=.
+  [[ "$3" == "" ]] || DIR="$3"
+  [[ -d "$DIR" ]] || mkdir -p "$DIR"
+  openssl enc -d -aes-256-cbc -salt -in "$2" -pass file:"$1" | \
+  pv | \
+  tar -v --extract --file - --gzip -C "$DIR"
+}
+
+function encrypt-dir-fpw {
+  PASS="$1"
+  find . -type f -print0 | while read -d '' -r FILE
+  do
+    OUT=$(mktemp file-XXXXXXXXXXXX)
+    echo "$FILE,$OUT" >> list.txt
+    echo "$FILE -> $OUT"
+    encrypt-fpw "$PASS" "$FILE" "$OUT"
+  done
+  echo "$(pwd)" >> list.txt
+  encrypt-fpw "$PASS" list.txt $(mktemp list-XXXXXXXXXXXX)
+  shred -uz -n 10 list.txt
+}
+
+function decrypt-dir-fpw {
+  PASS="$1"
+  DIR=.
+  [[ "$2" == "" ]] || DIR="$2"
+  for file in file-*
+  do
+    decrypt-fpw "$PASS" "$file" "$DIR"
+  done
+}
