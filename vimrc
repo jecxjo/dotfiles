@@ -97,10 +97,22 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buff
 " }}}
 
 " Key Remapping {{{
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-L> <C-W>l<C-W>_
-map <C-H> <C-W>h<C-W>_
+
+" Enter command mode
+nnoremap ; :
+nnoremap : ;
+
+" external command
+nnoremap ! :!
+nnoremap r! :r!
+
+" Move lines and selections with c-j, c-k
+nnoremap <c-k> :m-2<cr>==
+nnoremap <c-j> :m+<cr>==
+inoremap <c-k> <esc>:m-2<cr>==gi
+inoremap <c-j> <esc>:m+<cr>==gi
+vnoremap <c-j> :m'>+<cr>gv=gv
+vnoremap <c-k> :m-2<cr>gv=gv
 
 " Uppercase
 inoremap <C-u> <esc>viwUea
@@ -333,6 +345,19 @@ endfunction
 
 " }}}
 
+" Display Registers and paste {{{
+function! Reg()
+  reg
+  echo "Register: "
+  let char = nr2char(getchar())
+  if char != "\<Esc>"
+    execute "normal! \"".char."p"
+  endif
+  redraw
+endfunction
+
+command! -nargs=0 Reg call Reg()
+"  }}}
 
 " }}}
 
