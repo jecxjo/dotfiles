@@ -98,10 +98,6 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buff
 
 " Key Remapping {{{
 
-" Enter command mode
-nnoremap ; :
-nnoremap : ;
-
 " external command
 nnoremap ! :!
 nnoremap r! :r!
