@@ -355,6 +355,35 @@ endfunction
 command! -nargs=0 Reg call Reg()
 "  }}}
 
+" Shell Script to new Buffer {{{
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  let isfirst = 1
+  let words = []
+  for word in split(a:cmdline)
+    if isfirst
+      let isfirst = 0
+    else
+      if word[0] =~ '\v[%#<]'
+        let word = expand(word)
+      endif
+      let word = shellescape(word, 1)
+    endif
+    call add(words, word)
+  endfor
+  let expand_cmdline = join(words)
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered: ' . a:cmdline)
+  call setline(2, 'Expanded to: ' . expand_cmdline)
+  call append(line('$'), substitute(getline(2), '.', '=', 'g'))
+  silent execute '$read !'. expand_cmdline
+  1
+endfunction
+
+command! -complete=file -nargs=* LS call s:RunShellCommand('ls '.<q-args>)
+"  }}}
+
 " }}}
 
 "
