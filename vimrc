@@ -217,6 +217,17 @@ endif
 " Plugins {{{
 "
 
+" {{{ Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" }}}
+
 " { Rainbow
 let g:rainbow_active = 1
 
@@ -280,7 +291,7 @@ let g:alternateSearchPath = 'sfr:../source,sfr:../src,sfr:../include,sfr:../inc,
 " { Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_section_z="%3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3c [%02B]"
-let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#tab_min_count = 2
 " }
 
@@ -356,8 +367,8 @@ command! -nargs=0 Reg call Reg()
 "  }}}
 
 " Shell Script to new Buffer {{{
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
-function! s:RunShellCommand(cmdline)
+command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
+function! RunShellCommand(cmdline)
   let isfirst = 1
   let words = []
   for word in split(a:cmdline)
@@ -381,8 +392,46 @@ function! s:RunShellCommand(cmdline)
   1
 endfunction
 
-command! -complete=file -nargs=* LS call s:RunShellCommand('ls '.<q-args>)
+command! -complete=file -nargs=* LS call RunShellCommand('ls '.<q-args>)
+
+" Grep Buffers
+function! BuffersList()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+
+function! GrepBuffers (expression)
+  exec 'vimgrep/'.a:expression.'/'.join(BuffersList())
+endfunction
+
+command! -nargs=+ GrepBufs call GrepBuffers(<q-args>)
+nnoremap <leader>z :call GrepBuffers("<C-R><C-W>")<CR>
+
 "  }}}
+
+" Blink on searches {{{
+function! HLNext (blinktime)
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('ErrorMsg', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
+endfunction
+nnoremap <silent> n n:call HLNext(0.2)<CR>
+nnoremap <silent> N N:call HLNext(0.2)<CR>
+" }}}
+
+" Run as vimscript {{{
+command! -bar -range=% SourceSelected execute <line1> . ',' . <line2> . 'y|@"'
+command! -bar SourceThis execute '%y|@"'
+" }}}
 
 " }}}
 
