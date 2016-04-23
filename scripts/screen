@@ -1,3 +1,4 @@
+#!/bin/sh
 set -a
 # Screen
 alias sc="screen -S"

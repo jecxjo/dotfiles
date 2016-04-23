@@ -1,7 +1,8 @@
+#!/bin/sh
 set -a
 # Symetric Encryptionsing GnuPG
-function sym-encrypt {
-  if [[ $# -eq 2 ]]
+sym_encrypt() {
+  if [ $# -eq 2 ]
   then
     gpg --compress-algo BZIP2 --bzip2-compress-level 9 \
       --cipher-algo AES256 \
@@ -11,8 +12,8 @@ function sym-encrypt {
   fi
 }
 
-function sym-decrypt {
-  if [[ $# -eq 2 ]]
+sym_decrypt() {
+  if [ $# -eq 2 ]
   then
     gpg --decrypt -o "$2" "$1"
   else

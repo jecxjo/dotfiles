@@ -1,19 +1,20 @@
+#!/bin/sh
 set -a
 # Mark and Jump
 export MARKPATH=$HOME/.marks
-function jump {
+jump() {
     cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
 }
-function mark {
+mark() {
     mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
 }
-function unmark {
+unmark() {
     rm -i "$MARKPATH/$1"
 }
-function marks {
+marks() {
     for f in "$MARKPATH"/*
     do
-      echo "$(basename $f) -> $(readlink $f)" | sed 's/ -/\t-/g'
+      echo "$(basename "$f") -> $(readlink "$f")" | sed 's/ -/\t-/g'
     done
     echo
 }

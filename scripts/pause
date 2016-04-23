@@ -1,6 +1,7 @@
+#!/bin/sh
 set -a
 # pause
-function pause {
+pause() {
   read -p "Press Any Key"
 }
 

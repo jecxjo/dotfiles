@@ -1,3 +1,4 @@
+#/bin/sh
 set -a
 # Convert hex to decimal
-function hex2dec { printf "%d\n" 0x"$1"; }
+hex2dec() { printf "%d\n" 0x"$1"; }

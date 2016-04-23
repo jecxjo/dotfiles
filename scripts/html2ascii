@@ -1,7 +1,8 @@
+#!/bin/sh
 set -a
 
 # Convert html file to ASCII
-function html2ascii {
+html2ascii() {
   lynx -force_html -stdin -dump -nolist
 }
 

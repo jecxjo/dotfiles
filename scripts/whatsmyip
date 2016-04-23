@@ -1,6 +1,7 @@
+#!/bin/sh
 set -a
 
 # Get IP Address
-function whatsmyip {
+whatsmyip() {
   curl -s ip.nu | html2ascii
 }

@@ -1,6 +1,7 @@
+#!/bin/sh
 set -a
 # links using framebuffer
-function fblinks {
+fblinks() {
   xlinks -g -driver fb "$@"
 }
 

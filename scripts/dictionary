@@ -1,7 +1,8 @@
+#!/bin/sh
 # Dictionary lookup
 set -a
-function dictionary {
-  if [[ $# -ge 2 ]]
+dictionary() {
+  if [ $# -ge 2 ]
   then
     echo "dictionary: too many args"
     return 1

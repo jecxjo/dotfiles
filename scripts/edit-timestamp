@@ -1,10 +1,11 @@
+#!/bin/sh
 set -a
 
 # Edit without changing timestamp
-function edit-timestamp {
+edit_timestamp() {
   MY_TMPDIR=/tmp
-  REAL_FILE=$1
-  TMP_FILE=$(mktemp $MY_TMPDIR/file-XXXXXX)
+  REAL_FILE="$1"
+  TMP_FILE="$(mktemp $MY_TMPDIR/file-XXXXXX)"
   cp -p "$REAL_FILE" "$TMP_FILE"
   "$EDITOR" "$TMP_FILE"
   touch -r "$REAL_FILE" "$TMP_FILE"

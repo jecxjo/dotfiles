@@ -1,7 +1,8 @@
+#!/bin/sh
 set -a
 
 # Show most frequently used commands
-function freq {
+freq() {
   cut -f1 -d" " "$HOME"/.bash_history | \
   sort | \
   uniq -c | \

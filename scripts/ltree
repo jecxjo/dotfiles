@@ -1,7 +1,8 @@
+#!/bin/sh
 set -a
 
 # list tree
-function ltree {
+ltree() {
     tree -C "$@" | less -R
 }
 

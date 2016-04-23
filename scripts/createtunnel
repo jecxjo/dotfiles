@@ -1,6 +1,7 @@
+#!/bin/sh
 # create ssh tunnel
 set -a
-function createTunnel {
+createTunnel() {
   if [ $# -eq 3 ]
   then
     user=$1
@@ -15,10 +16,10 @@ function createTunnel {
       localPort=$3
       remotePort=$4
     else
-      echo -n "User: "; read user
-      echo -n "host: "; read host
-      echo -n "Distant host: "; read remotePort
-      echo -n "Local port: "; read localPort
+      echo "User: "; read -r user
+      echo "Host: "; read -r host
+      echo "Distant Host: "; read -r remotePort
+      echo "Local port: "; read -r localPort
     fi
   fi
   ssh -N -f "$user@$host" -L "${localPort}:${host}:${remotePort}"

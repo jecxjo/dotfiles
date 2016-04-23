@@ -1,6 +1,7 @@
+#!/bin/sh
 set -a
 # Find the disk hog
-function ducks {
+ducks() {
   du -cks ./* | sort -rn | head -11
 }
 

@@ -1,7 +1,8 @@
+#!/bin/bash
 set -a
 # Pipe text to typer and it echos it as if someone was typing
-function typer {
-  while read x
+typer() {
+  while read -r x
   do
     for((i=0;i<${#x};i++))
     do

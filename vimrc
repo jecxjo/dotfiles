@@ -439,6 +439,7 @@ command! -bar SourceThis execute '%y|@"'
 " Misc {{{
 "
 au BufNewFile,BufRead *.md set filetype=mkd " md files set to markdown
+au BufNewFile,BufRead *.handlebars set filetype=html " handelebars are html
 
 function! InitializeDirectories()
   let separator = "."

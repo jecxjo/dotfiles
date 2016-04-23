@@ -3,7 +3,7 @@
 #
 
 set -a
-export EDITOR="vim"
+export EDITOR="vi"
 # Set to vi mode
 set -o vi
 
@@ -67,3 +67,5 @@ EOF
 else
   source "$HOME/.bashrc.local"
 fi
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV"

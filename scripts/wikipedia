@@ -1,8 +1,8 @@
+#!/bin/sh
 set -a
 # Wikipedia lookup
-function wikipedia {
-  searchterm=${@// /_/g}
+wikipedia() {
+  searchterm=${*// /_/g}
   echo "Search: $searchterm"
   dig +short txt "$searchterm".wp.dg.cx
 }
-

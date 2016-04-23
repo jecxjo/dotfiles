@@ -1,5 +1,6 @@
+#!/bin/sh
 # Convert Word Doc file to PDF
 set -a
-function doc2pdf {
+doc2pdf() {
   unoconv -f pdf "$@"
 }

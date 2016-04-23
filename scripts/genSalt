@@ -1,6 +1,7 @@
+#!/bin/sh
 set -a
 # genSalt - gennerate password salt
-function genSalt {
+genSalt() {
   openssl rand -base64 32
 }
 
