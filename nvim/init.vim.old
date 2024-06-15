@@ -1,0 +1,173 @@
+set rtp+=/opt/homebrew/opt/fzf
+
+call plug#begin()
+
+" Functionality
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdcommenter'
+Plug 'alvan/vim-closetag'
+Plug 'tommcdo/vim-exchange'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+Plug 'eslint/eslint'
+Plug 'mattn/emmet-vim'
+if !exists('g:vscode')
+    "Plug 'burntsushi/ripgrep'
+    "Plug 'jremmen/vim-ripgrep'
+    Plug '/opt/homebrew/opt/fzf'
+    Plug 'junegunn/fzf.vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'preservim/nerdtree'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'airblade/vim-gitgutter'
+    " Need to rebuild nvim with python support
+    "Plug 'valloric/youcompleteme'
+endif
+
+" Misc
+Plug 'vimwiki/vimwiki'
+
+call plug#end()
+
+""" Main Configuration
+set nocompatible
+filetype plugin indent on
+syntax on
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+set incsearch ignorecase smartcase hlsearch
+set wildmode=longest,list,full wildmenu
+set ruler laststatus=2 showcmd showmode
+set list listchars=trail:»,tab:»-
+set fillchars+=vert:\ 
+set wrap breakindent
+set encoding=utf-8
+set textwidth=0
+set hidden
+set number
+set title
+set cursorline
+set cursorcolumn
+
+""" File Type Specific
+
+" HTML / XML
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType scss setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" JavaScript
+autocmd FileType json setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+" Simple re-format for minified Javascript
+command! UnMinify call UnMinify()
+function! UnMinify()
+    %s/{\ze[^\r\n]/{\r/g
+    %s/){/) {/g
+    %s/};\?\ze[^\r\n]/\0\r/g
+    %s/;\ze[^\r\n]/;\r/g
+    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+    normal ggVG=
+endfunction
+
+" Vue
+autocmd Filetype vue setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Typescript
+autocmd Filetype typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd Filetype typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Vimwiki
+autocmd FileType vimwiki autocmd BufWritePost <buffer> silent Vimwiki2HTML
+
+""" Plugin Configuration
+
+" Prettier
+let g:prettier#autoformat_config_present = 1
+
+" CtrlP
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" NERDTree
+if !exists('g:vscode')
+    nnoremap <leader>n :NERDTreeFocus<CR>
+    nnoremap <C-n> :NERDTree<CR>
+    nnoremap <C-t> :NERDTreeToggle<CR>
+    nnoremap <leader>f :NERDTreeFind<CR>
+endif
+
+""" Editor Configuration
+if exists('g:vscode')
+    " VSCode extension
+    xnoremap <C-S-P> <Cmd>call VSCodeNotifyVisual('workbench.action.showCommands', 1)<CR>
+    nnoremap ? <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
+
+    function! s:editOrNew(...)
+        let file = a:1
+        let bang = a:2
+
+        if empty(file)
+            if bang ==# '!'
+                call VSCodeNotify('workbench.action.files.revert')
+            else
+                call VSCodeNotify('workbench.action.quickOpen')
+            endif
+        else
+            " Last arg is to close previous file, e.g. e! ~/blah.txt will open blah.txt instead the current file
+            call VSCodeExtensionNotify('open-file', expand(file), bang ==# '!' ? 1 : 0)
+        endif
+    endfunction
+
+    function! s:saveAndClose() abort
+        call VSCodeCall('workbench.action.files.save')
+        call VSCodeNotify('workbench.action.closeActiveEditor')
+    endfunction
+
+    function! s:saveAllAndClose() abort
+        call VSCodeCall('workbench.action.files.saveAll')
+        call VSCodeNotify('workbench.action.closeAllEditors')
+    endfunction
+
+    " command! -bang -nargs=? Edit call VSCodeCall('workbench.action.quickOpen')
+    command! -complete=file -bang -nargs=? Edit call <SID>editOrNew(<q-args>, <q-bang>)
+    command! -bang -nargs=? Ex call <SID>editOrNew(<q-args>, <q-bang>)
+    command! -bang Enew call <SID>editOrNew('__vscode_new__', <q-bang>)
+    command! -bang Find call VSCodeNotify('workbench.action.quickOpen')
+
+    command! -complete=file -bang -nargs=? Write if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.files.saveAs') | else | call VSCodeNotify('workbench.action.files.save') | endif
+    command! -bang Saveas call VSCodeNotify('workbench.action.files.saveAs')
+
+    command! -bang Wall call VSCodeNotify('workbench.action.files.saveAll')
+    command! -bang Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor') | endif
+
+    command! -bang Wq call <SID>saveAndClose()
+    command! -bang Xit call <SID>saveAndClose()
+
+    command! -bang Qall call VSCodeNotify('workbench.action.closeAllEditors')
+
+    command! -bang Wqall call <SID>saveAllAndClose()
+    command! -bang Xall call <SID>saveAllAndClose()
+
+    AlterCommand e[dit] Edit
+    AlterCommand ex Ex
+    AlterCommand ene[w] Enew
+    AlterCommand fin[d] Find
+    AlterCommand w[rite] Write
+    AlterCommand sav[eas] Saveas
+    AlterCommand wa[ll] Wall
+    AlterCommand q[uit] Quit
+    AlterCommand wq Wq
+    AlterCommand x[it] Xit
+    AlterCommand qa[ll] Qall
+    AlterCommand wqa[ll] Wqall
+    AlterCommand xa[ll] Xall
+
+    nnoremap ZZ <Cmd>Wq<CR>
+    nnoremap ZQ <Cmd>Quit!<CR>
+else
+    " Ordinary neovim
+endif
