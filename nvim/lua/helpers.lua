@@ -7,6 +7,7 @@ M.autocmd = vim.api.nvim_create_autocmd
 M.set = vim.opt
 M.cmd = vim.cmd
 M.g = vim.g
+M.o = vim.o
 
 function M.filetype_autocmd(filetype, cmd, params)
     M.autocmd("FileType", { pattern = filetype, command = cmd .. ' ' .. params })

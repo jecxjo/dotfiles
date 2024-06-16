@@ -16,6 +16,9 @@ h.set.relativenumber = true
 h.set.title = true
 h.set.cursorline = true
 
+h.o.wildmode = 'longest,list,full'
+h.o.wilemenu = true
+
 -- Languages
 -- HTML / XML
 h.filetype_autocmd('html', 'setlocal', 'shiftwidth=2 tabstop=2 softtabstop=2')
