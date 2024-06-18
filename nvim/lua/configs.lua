@@ -17,7 +17,7 @@ h.set.title = true
 h.set.cursorline = true
 
 h.o.wildmode = 'longest,list,full'
-h.o.wilemenu = true
+h.o.wildmenu = true
 
 -- Languages
 -- HTML / XML
