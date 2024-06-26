@@ -12,6 +12,8 @@ vim.api.nvim_set_keymap('ia', 'afunc@', '() => { /* TODO */ }', { noremap = true
 -- classes
 vim.api.nvim_set_keymap('ia', 'class@', 'class X {\n/* Member Variables */\n\nconstructor() {\n/* TODO */\n}\n}', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('ia', 'eclass@', 'export class X {\n/* Member Variables */\n\nconstructor() {\n/* TODO */\n}\n}', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('ia', 'iface@', 'interface X {\n/* Properties */\n}', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('ia', 'eiface@', 'export interface X {\n/* Properties */\n}', { noremap = true, silent = true })
 
 -- if
 vim.api.nvim_set_keymap('ia', 'if@', 'if ( /* TEST */ ) {\n/* BODY */\n}', { noremap = true, silent = true })

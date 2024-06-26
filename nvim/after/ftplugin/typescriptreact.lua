@@ -12,6 +12,8 @@ vim.api.nvim_set_keymap('ia', 'afunc@', '() => { /* TODO */ }', { noremap = true
 -- classes
 vim.api.nvim_set_keymap('ia', 'class@', 'class X {\n/* Member Variables */\n\nconstructor() {\n/* TODO */\n}\n}', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('ia', 'eclass@', 'export class X {\n/* Member Variables */\n\nconstructor() {\n/* TODO */\n}\n}', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('ia', 'iface@', 'interface X {\n/* Properties */\n}', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('ia', 'eiface@', 'export interface X {\n/* Properties */\n}', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('ia', 'comp@', '@Component({\ntag: \'x-comp\',\nassetDirs: [],\nformAssociated: false,\nscoped: false,\nshadow: false,\nstyleUrl: \'x-comp.css\',\nstyleUrls: [],\nstyles: \'\'\n})\nexport class X {\n/* Private Vars */\n\n/* Props */\n\n/* State */\n\n/* Event Emitters */\n\n componentWillLoad() { }\n\ncomponentDidLoad() { }\n\nrender() {\nreturn <div />;\n}\n}', { noremap = true, silent = true })
 
 -- if
