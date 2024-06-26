@@ -44,6 +44,8 @@ if vim.fn.exists('g:vscode') == 0 then
     Plug('stevearc/overseer.nvim')
     Plug('nvim-telescope/telescope.nvim')
     Plug('rcarriga/nvim-notify')
+    Plug('nvim-lua/plenary.nvim')
+    Plug('ThePrimeagen/harpoon')
 end
 
 -- Misc
@@ -61,3 +63,4 @@ require("plugins/nvim-treesitter")
 require("plugins/nerdtree")
 require("plugins/fzf")
 require("plugins/overseer")
+require("plugins/harpoon")
