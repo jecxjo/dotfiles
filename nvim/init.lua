@@ -1,5 +1,5 @@
 require("configs")
 require("plugins")
--- require("keybindings")
+require("keybindings")
 require("functions")
 require("final")
