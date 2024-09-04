@@ -29,6 +29,8 @@ local default_setup = function(server)
     })
 end
 
+require('lspconfig').racket_langserver.setup{}
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {},

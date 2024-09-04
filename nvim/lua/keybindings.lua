@@ -2,6 +2,7 @@ local h = require('helpers')
 
 -- File exploration
 h.map('n', '<leader>p', ':Telescope find_files<CR>')
+h.map('n', '<leader>d', ':Telescope lsp_document_symbols<CR>')
 
 -- Git Stuff
 h.map('n', '<leader>gg', ':Git<Cr>')

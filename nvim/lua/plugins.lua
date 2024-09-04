@@ -18,6 +18,8 @@ Plug('CopilotC-Nvim/CopilotChat.nvim', { ['branch'] = 'canary' })
 Plug('christoomey/vim-conflicted')
 Plug('jecxjo/rest-client.vim', { ['branch'] = 'main' })
 Plug('freitass/todo.txt-vim')
+Plug('editorconfig/editorconfig-vim')
+Plug('ctrlpvim/ctrlp.vim')
 if vim.fn.exists('g:vscode') == 0 then
     Plug('/opt/homebrew/opt/fzf')
     Plug('junegunn/fzf.vim')
